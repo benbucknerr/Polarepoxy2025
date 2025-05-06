@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Polar Epoxy</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-image: url('/Images/mitchgarage.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Color Scheme - Cool blues for "Polar" theme */
+        :root {
+            --primary: #1a5276;
+            --secondary: #2e86c1;
+            --accent: #3498db;
+            --light: #ebf5fb;
+            --dark: #0e3d5c;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #a3d6ff;
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--light);
+        }
+        
+        nav ul li a.active {
+            color: #a3d6ff;
+            font-weight: bold;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .breadcrumb li {
+            margin: 0 0.5rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: var(--primary);
+        }
+        
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        /* About Section */
+        .about-section {
+            background-color: white;
+            padding: 4rem 0;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-image {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Mission & Values */
+        .mission-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .mission-card, .values-card {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .mission-card:hover, .values-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .mission-card h3, .values-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .values-list {
+            list-style: none;
+        }
+        
+        .values-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .values-list li::before {
+            content: '✓';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Team Section */
+        .team-section {
+            background-color: var(--light);
+            padding: 4rem 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .team-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .role {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .team-social a {
+            color: var(--primary);
+            transition: color 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .team-social a:hover {
+            color: var(--accent);
+        }
+        
+        /* Sponsors Section */
+        .sponsors-section {
+            background-color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .sponsors-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sponsor-card {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .sponsor-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .sponsor-logo {
+            height: 150px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sponsor-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .sponsor-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .sponsor-info p {
+            margin-bottom: 1rem;
+        }
+        
+        .sponsor-link {
+            display: inline-block;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        
+        .sponsor-link:hover {
+            color: var(--primary);
+        }
+        
+        /* Why Choose Us */
+        .why-us {
+            background-color: var(--light);
+            padding: 4rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--dark);
+        }
+        
+        .secondary-button {
+            display: inline-block;
+            background-color: transparent;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid white;
+        }
+        
+        .secondary-button:hover {
+            background-color: white;
+            color: var(--secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-col h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            nav ul li {
+                margin: 0 0.75rem;
+            }
+            
+            .mission-values, 
+            .team-grid,
+            .features-grid,
+            .sponsors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button, .secondary-button {
+                width: 80%;
+                margin-bottom: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Polar<span>Epoxy</span></a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+            
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Story</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>What is Polar Epoxy?</h3>
+                    <p>At Polar Epoxy, we use the latest tools and techniques to deliver top-quality epoxy coatings. We partner with leading suppliers and experts in Minnesota to ensure our skills and products meet the highest standards. We continuously test and refine our offerings to stay at the forefront of the industry. Your satisfaction is our priority, and we don't consider the job done until you're completely happy with the results..</p>
+                    <p>.</p>
+                </div>
+                <div class="about-image">
+                    <img src="/Images/Oldmitchgarage.jpeg" alt="Polar Epoxy History">
+                </div>
+            </div>
+
+            <div class="mission-values">
+                <div class="mission-card">
+                    <h3>Our Mission</h3>
+                    <p>To transform ordinary concrete surfaces into extraordinary, durable, and aesthetically pleasing epoxy floors that exceed our clients' expectations through craftsmanship, innovation, and unparalleled customer service.</p>
+                    <p>We strive to be the most trusted name in epoxy flooring by focusing on quality, reliability, and building lasting relationships with every client we serve.</p>
+                </div>
+                <div class="values-card">
+                    <h3>Our Values</h3>
+                    <ul class="values-list">
+                        <li>Quality - We never compromise on materials or workmanship</li>
+                        <li>Integrity - We're honest, transparent, and ethical in all our dealings</li>
+                        <li>Reliability - We deliver on our promises, on time and within budget</li>
+                        <li>Innovation - We continuously improve our techniques and solutions</li>
+                        <li>Customer Focus - Your satisfaction is our ultimate measure of success</li>
+                        <li>Safety - We prioritize safety in every aspect of our work</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Polar Epoxy</h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="/Images/BenP.jpeg" alt="Team Member 1">
+                    </div>
+                    <div class="team-info">
+                        <h3>Benjamin Buckner</h3>
+                        <div class="role">Co Founder</div>
+                        At Polar Epoxy I am tasked with researching and implementing our epoxy products to ensure Polar Epoxy has the best materials for each job. I create and maintain relationships with our suppliers, such as Sherwin-Williams, XPS Epoxy, and Torginol to secure the best prices on all our products. I also work side by side with our sales team to guarantee they have the highest level of training and knowledge about our process..</p>
+                        <div class="team-social">
+                           
+                            <a href="#">IN</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-image">
+                        <img src="/Images/MitchP.png" alt="Team Member 2">
+                    </div>
+                    <div class="team-info">
+                        <h3>Mitchell Lovett </h3>
+                        <div class="role">Co Founder</div>
+                        <p>At Polar Epoxy, I am responsible for preparing garages for epoxy coatings. As with everything, preparation is key, and I ensure we have the best equipment for every job. I also make certain the technique is perfect to guarantee the epoxy adheres flawlessly, resulting in a garage that lasts for years to come.</p>
+                        <div class="team-social">
+
+                            <a href="#">IN</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section class="sponsors-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Trusted Partners</h2>
+            </div>
+            <div class="sponsors-intro">
+                <p>At Polar Epoxy, we collaborate with industry-leading suppliers and manufacturers to ensure we deliver the highest quality epoxy flooring solutions. These partnerships allow us to offer premium products, cutting-edge techniques, and superior results for every project.</p>
+            </div>
+            <div class="sponsors-grid">
+                <div class="sponsor-card">
+                    <div class="sponsor-logo">
+                        <img src="/Images/Flake.jpg" alt="Sponsor 1">
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>Torginol Polymer Flake</h3>
+                        <p>At Polar Epoxy, we proudly partner with Torginol Polymer Flake to deliver stunning and durable epoxy flooring solutions. Torginol's premium flakes add a unique, decorative touch to our floors while enhancing durability and slip resistance. With over 30 years of industry expertise, Torginol helps us create customized, high-quality finishes that exceed our clients' expectations.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="sponsor-card">
+                    <div class="sponsor-logo">
+                        <img src="/Images/Sherwin.png" alt="Sponsor 2">
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>Sherwin Willaims </h3>
+                        <p>At Polar Epoxy, we proudly use Sherwin-Williams premium epoxy products to deliver exceptional flooring solutions. Known for their durability, innovation, and superior quality, Sherwin-Williams coatings ensure long-lasting, high-performance results for residential, commercial, and industrial spaces. Trust in the best for your flooring needs.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="sponsor-card">
+                    <div class="sponsor-logo">
+                        <img src="/Images/XPS.jpg" alt="Sponsor 3">
+                    </div>
+                    <div class="sponsor-info">
+                        <h3>XPS Polishing Systems</h3>
+                        <p>At Polar Epoxy, we proudly collaborate with XPS Polishing Systems to deliver innovative and customized epoxy flooring solutions. XPS provides specialized coating additives and decorative elements that allow us to create unique, durable, and visually stunning floors tailored to our clients' needs. With XPS, we ensure every project stands out with exceptional quality and design.</p>
+                        <a href="#" class="sponsor-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us">
+        <div class="container">
+            <h2 class="section-title">Why Choose Polar Epoxy</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Expert Craftsmanship</h3>
+                    <p>Our skilled technicians have years of experience delivering exceptional epoxy flooring results.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Timely Completion</h3>
+                    <p>We respect your time and complete projects on schedule without compromising quality.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💎</div>
+                    <h3>Premium Materials</h3>
+                    <p>We use only top-quality epoxy products that ensure durability and long-lasting performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Floors?</h2>
+            <p>Whether you're looking to upgrade your home garage, commercial space, or industrial facility, Polar Epoxy has the perfect flooring solution for you. Contact us today for a free consultation and quote.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="cta-button">Get Free Quote</a>
+                <a href="services.html" class="secondary-button">Explore Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Polar Epoxy</h4>
+                    <p>Providing premium epoxy flooring solutions for residential, commercial, and industrial clients. Quality craftsmanship and exceptional results guaranteed.</p>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="testimonials.html">Testimonials</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html#residential">Residential Epoxy</a></li>
+                        <li><a href="services.html#commercial">Commercial Epoxy</a></li>
+                        <li><a href="services.html#industrial">Industrial Epoxy</a></li>
+                        <li><a href="services.html#repairs">Epoxy Repairs</a></li>
+                        <li><a href="services.html#preparation">Concrete Preparation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Service Areas</h4>
+                    <ul>
+                        <li><a href="#">Minneapolis</a></li>
+                        <li><a href="#">St. Paul</a></li>
+                        <li><a href="#">Surrounding Metro</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Polar Epoxy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
